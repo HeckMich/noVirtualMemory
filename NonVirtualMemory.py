@@ -8,7 +8,7 @@ import io
 MEMORY_SIZE = 2048000
 physical_memory = bytearray(MEMORY_SIZE)
 
-lable_A = None
+label_A = None
 
 def load_bmp_to_array(bmp_file_path):
     with open(bmp_file_path, 'rb') as file:
@@ -87,7 +87,7 @@ def run_program_A(title, master, offset, image_data, width, height):
         def perform_update():
             if end_position[0] < total_length - 54:
                 end_position[0] = incremental_load_to_memory(image_data, offset, end_position[0])
-                update_image_from_memory(offset, total_length, label_A)
+                update_image_data_from_memory(offset, total_length, label_A)
                 label_A.after(100, perform_update)
             else:
                 print("Finished loading image data.")
@@ -117,8 +117,8 @@ def run_program_B(title, master, offset, image_data, width, height):
                 if end_position[0] >= total_length / 2 and end_position[0] < total_length - 10000:
                     end_position_A[0] = incremental_load_to_memory_A(image_data, 0, end_position_A[0], offset, end_position[0])
 
-                update_image_from_memory(offset, total_length, label_B)
-                update_image_from_memory(0, total_length, label_A)
+                update_image_data_from_memory(offset, total_length, label_B)
+                update_image_data_from_memory(0, total_length, label_A)
                 label_B.after(100, perform_update)
             else:
                 print("Finished loading image data.")
